@@ -1,0 +1,49 @@
+{
+  "name": "react-app",
+  "version": "1.0.0",
+  "description": "Just a test project.",
+  "repository": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 8090",
+    "production": "webpack",
+    "lint": "eslint app/; exit 0",
+    "fix": "eslint --fix app/; exit 0"
+  },
+  "keywords": [],
+  "author": "Mateusz Sienkan",
+  "license": "ISC",
+  "dependencies": {
+    "cache-loader": "^1.0.3",
+    "history": "^4.7.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "next",
+    "redux": "^3.7.2",
+    "uglifyjs-webpack-plugin": "^0.4.6"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "css-loader": "^0.28.5",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
