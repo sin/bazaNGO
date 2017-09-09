@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { container, name as nameClass, loading, fourofour } from './styles.css'
+import { orgTags } from '../Home/styles.css'
 import { getOrganization } from '../../api'
 
 class Home extends Component {
@@ -34,10 +35,13 @@ class Home extends Component {
 
   render () {
     const organization = (this.state && this.state.organization) || { empty: true }
-    const { name, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, empty, detail } = organization
+    const { name, tags, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, empty, detail } = organization
     return  !empty && !detail ? (
       <div className={container}>
         <h1 className={nameClass}>{name}</h1>
+        <div className={orgTags}>
+          {tags.map((tag, index) => <span key={index}>{tag}</span>)}
+        </div>
         <p>{purpose && purpose.split('. ').map((sentence) => sentence[0].toUpperCase() + sentence.substr(1).toLowerCase()).join('. ')}</p>
         <h3>Adres</h3>
         <p>

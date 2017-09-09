@@ -51,7 +51,6 @@ class Home extends Component {
   onTagClick(id) {
     let tags = this.state.tags.map((tag) => {
       tag = tag.id === id ? {...tag, active: !tag.active } : tag
-      console.log(tag)
       return tag
     })
     this.setState({ tags, page: 1 }, () => this.update())
