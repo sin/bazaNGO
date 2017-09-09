@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { container, editLink, name as nameClass, loading, fourofour, contact } from './styles.css'
+import { container, editLink, name as nameClass, loading, fourofour, contact, positions, adminName, adminPosition } from './styles.css'
 import { orgTags } from '../Home/styles.css'
 import { getOrganization } from '../../api'
 import { inactiveHeader } from '../../styles.css'
@@ -37,9 +37,8 @@ class Home extends Component {
 
   render () {
     const organization = (this.state && this.state.organization) || { empty: true }
-    const { id, name, is_active, tags, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, profile, empty, detail } = organization
+    const { id, name, is_active, tags, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, profile, administration, empty, detail } = organization
     const hasProfile = profile && (profile.email || profile.facebook || profile.phone_number || profile.www)
-
     return  !empty && !detail ? (
       <div className={container}>
         {this.props.disableEdit ? '' : (<Link className={editLink} to={`/organization/${id}/edit/`}>Edytuj dane</Link>)}
@@ -76,6 +75,22 @@ class Home extends Component {
           <strong>KRS:</strong> {krs}<br />
           <strong>Data rejestracji:</strong> {register_at}
         </p>
+        {administration && administration.length > 0 ?
+          (
+            <span className={positions}>
+              <h3>Członkowie zarządu</h3>
+              <div>
+                {administration.map(({id, full_name, position}) => (
+                  <p key={id}>
+                    <span className={adminName}>{full_name}</span><br />
+                    <span className={adminPosition}>{position}</span>
+                  </p>
+                ))}
+              </div>
+            </span>
+          )
+          : ''
+        }
       </div>
     ) : (<div className={container}>{this.loader()}</div>)
   }
