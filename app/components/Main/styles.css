@@ -13,6 +13,18 @@
   line-height: 50px;
 }
 
+.footer {
+  padding: 40px;
+  text-align: center;
+}
+
+.footer a {
+  color: #0366d6;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 980px) {
   .header h1 {
