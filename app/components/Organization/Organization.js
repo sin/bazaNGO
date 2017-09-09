@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { container, name as nameClass } from './styles.css'
+import { container, name as nameClass, loading, fourofour } from './styles.css'
 import { getOrganization } from '../../api'
 
 class Home extends Component {
@@ -9,7 +9,6 @@ class Home extends Component {
 
   componentWillMount() {
     this.update()
-    console.log(this.props)
   }
 
   searchResult({name}, key) {
@@ -29,14 +28,14 @@ class Home extends Component {
 
   loader() {
     return this.state && this.state.isLoading
-      ? (<li className={loading}>Ładowanie wyników...</li>)
-      : (<li className={loading}>Brak wyników...</li>)
+      ? (<div className={loading}>Ładowanie...</div>)
+      : (<div className={fourofour}>404</div>)
   }
 
   render () {
-    const organization = (this.state && this.state.organization) || []
-    const { name, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs } = organization
-    return (
+    const organization = (this.state && this.state.organization) || { empty: true }
+    const { name, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, empty, detail } = organization
+    return  !empty && !detail ? (
       <div className={container}>
         <h1 className={nameClass}>{name}</h1>
         <p>{purpose && purpose.split('. ').map((sentence) => sentence[0].toUpperCase() + sentence.substr(1).toLowerCase()).join('. ')}</p>
@@ -52,7 +51,7 @@ class Home extends Component {
           <strong>Data rejestracji:</strong> {register_at}
         </p>
       </div>
-    )
+    ) : (<div className={container}>{this.loader()}</div>)
   }
 }
 
