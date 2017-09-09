@@ -4,6 +4,7 @@ import {
   searchForm, searchString, searchInputs, searchCategory, resultListContainer, resultList, resultItem, loading, pagination,
   page as pageClass, active as activeClass, tags as tagsClass, resultItemBody, resultItemName
 } from './styles.css'
+import { inactive } from '../../styles.css'
 import { getOrganizations, getTags, getCategories } from '../../api'
 
 class Home extends Component {
@@ -23,13 +24,13 @@ class Home extends Component {
     document.querySelector(`.${searchString}`).value = window.searchQuery || ''
   }
 
-  searchResult({id, name, tags}) {
+  searchResult({id, name, tags, is_active}) {
     return (
       <li key={id} className={resultItem}>
         <Link to={`/organization/${id}`}>
           <div className={resultItemBody}>
             <div className={resultItemName}>
-              {name}
+              {name} {is_active ? '' : <span className={inactive}>Nieaktywna</span>}
             </div>
             <div className={tagsClass}>
               {tags.map((tag, index) => (<span key={index}>{tag}</span>))}
