@@ -9,13 +9,13 @@ const getOrganizations = (search) => {
   let attrs = getAttrs({
     search: search ? search : ''
   })
-  return fetch(BASE + 'organization/?' + attrs, { method: 'GET', ...headers }).then(
+  return fetch(`${BASE}organization/?${attrs}`, { method: 'GET', ...headers }).then(
     (response) => response.json()
   )
 }
 
 const getOrganization = (id) => {
-  return fetch(BASE + 'organization/' + id, { method: 'GET', ...headers }).then(
+  return fetch(`${BASE}organization/${id}/`, { method: 'GET', ...headers }).then(
     (response) => response.json()
   )
 }

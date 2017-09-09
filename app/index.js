@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createHashHistory'
 import styles from './styles.css'
 
 import configureStore from 'store'

@@ -14,15 +14,18 @@ class Home extends Component {
     this.update()
   }
 
+  componentDidMount() {
+    document.getElementsByClassName(searchString)[0].value = window.searchQuery
+  }
+
   searchResult({id, name}) {
-    return (<li key={id} className={resultItem}><Link to={`organization${id}`}>{name}</Link></li>)
+    return (<li key={id} className={resultItem}><Link to={`/organization/${id}`}>{name}</Link></li>)
   }
 
   update() {
       this.setState({ isLoading: true})
       const searchInput = document.getElementsByClassName(searchString)[0]
-      const search = searchInput ? searchInput.value : ''
-
+      const search = searchInput ? searchInput.value : window.searchQuery
       getOrganizations(search).then(({results}) => {
         this.setState({
           results,

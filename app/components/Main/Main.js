@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { header } from './styles.css'
 
 class Home extends Component {
@@ -6,7 +7,7 @@ class Home extends Component {
     return (
       <div>
         <div className={header}>
-          <h1>Baza Organizacji Pozarządowych COP</h1>
+          <h1><Link to="/">Baza Organizacji Pozarządowych COP</Link></h1>
         </div>
         {this.props.children}
       </div>
