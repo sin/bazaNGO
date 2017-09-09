@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    document.getElementsByClassName(searchString)[0].value = window.searchQuery
+    document.getElementsByClassName(searchString)[0].value = window.searchQuery || ''
   }
 
   searchResult({id, name}) {
