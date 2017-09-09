@@ -1,30 +1,53 @@
 import React, { Component } from 'react'
-import { question, choices, choice, choiceLink } from './styles.css'
 import { Link } from 'react-router-dom'
+import { searchForm, searchString, resultListContainer, resultList, resultItem, loading } from './styles.css'
+import { getOrganizations } from '../../api'
 
 class Home extends Component {
+  constructor() {
+    super()
+
+    this.state = { isLoading: false }
+  }
+
+  componentWillMount() {
+    this.update()
+  }
+
+  searchResult({id, name}) {
+    return (<li key={id} className={resultItem}><Link to={`organization${id}`}>{name}</Link></li>)
+  }
+
+  update() {
+      this.setState({ isLoading: true})
+      const searchInput = document.getElementsByClassName(searchString)[0]
+      const search = searchInput ? searchInput.value : ''
+
+      getOrganizations(search).then(({results}) => {
+        this.setState({
+          results,
+          isLoading: false
+        })
+      })
+  }
+
+  loader() {
+    return this.state && this.state.isLoading
+    ? (<li className={loading}>Ładowanie wyników...</li>)
+    : (<li className={loading}>Brak wyników...</li>)
+  }
+
   render () {
+    const res = (this.state && this.state.results) || []
     return (
-      <div className="container">
-        <h2 className={question}>Co chcesz zrobić?</h2>
-        <div className={choices}>
-          <div className={choice}>
-            <Link to='/' className={choiceLink}>
-              <span>Jestem urzędnikiem</span>
-                Chcę dodać NGO do bazy
-              </Link>
-          </div>
-          <div className={choice}>
-            <Link to='/' className={choiceLink}>
-              <span>Jestem przedstawicielem NGO</span>
-              Chcę dodać swoją organizację do bazy
-            </Link>
-          </div>
-          <div className={choice}>
-            <Link to='/' className={choiceLink}>
-              Chcę znaleźć NGO
-            </Link>
-          </div>
+      <div className='container'>
+        <div className={searchForm}>
+          <input className={searchString} type='text' placeholder="Czego szukasz?" onChange={this.update.bind(this)}/>
+        </div>
+        <div className={resultListContainer}>
+          <ul className={resultList}>
+            {res.length > 0 ? res.map((el, key) => this.searchResult(el, key)) : this.loader()}
+          </ul>
         </div>
       </div>
     )
