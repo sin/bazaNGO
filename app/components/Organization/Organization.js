@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { container, name as nameClass, loading, fourofour, contact } from './styles.css'
+import { Link } from 'react-router-dom'
+import { container, editLink, name as nameClass, loading, fourofour, contact } from './styles.css'
 import { orgTags } from '../Home/styles.css'
 import { getOrganization } from '../../api'
 import { inactiveHeader } from '../../styles.css'
@@ -36,12 +37,16 @@ class Home extends Component {
 
   render () {
     const organization = (this.state && this.state.organization) || { empty: true }
-    const { name, is_active, tags, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, profile, empty, detail } = organization
+    const { id, name, is_active, tags, purpose, street, street_number, flat_number, postal_code, city, register_at, nip, krs, profile, empty, detail } = organization
     const hasProfile = profile && (profile.email || profile.facebook || profile.phone_number || profile.www)
 
     return  !empty && !detail ? (
       <div className={container}>
-        <h1 className={nameClass}>{(profile && profile.name) || name} {is_active ? '' : <span className={inactiveHeader}>Nieaktywna</span>}</h1>
+        {this.props.disableEdit ? '' : (<Link className={editLink} to={`/organization/${id}/edit/`}>Edytuj dane</Link>)}
+        <h1 className={nameClass}>
+          {(profile && profile.name) || name}
+          {is_active ? '' : <span className={inactiveHeader}>Nieaktywna</span>}
+        </h1>
         <div className={orgTags}>
           {tags.map((tag, index) => <span key={index}>{tag}</span>)}
         </div>
