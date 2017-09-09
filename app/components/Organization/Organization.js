@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { container, name as nameClass, loading, fourofour } from './styles.css'
+import { container, name as nameClass, loading, fourofour, contact } from './styles.css'
 import { orgTags } from '../Home/styles.css'
 import { getOrganization } from '../../api'
 
@@ -47,7 +47,7 @@ class Home extends Component {
         <p>{purpose && purpose.split('. ').map((sentence) => sentence[0].toUpperCase() + sentence.substr(1).toLowerCase()).join('. ')}</p>
         {hasProfile ?
           (
-            <span>
+            <span className={contact}>
               <h3>Kontakt</h3>
               <p>
                 {profile.email ? (<span><i className="fa fa-envelope-o" aria-hidden="true" /> <strong>Email:</strong> <a href={profile.email}>{profile.email}</a><br/></span>) : ''}
