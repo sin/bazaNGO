@@ -11,7 +11,7 @@
 }
 
 .searchForm {
-  padding: 20px;
+  padding: 30px;
   background: #EEEEEE;
   border-bottom: 1px solid #DDDDDD;
 }
@@ -118,7 +118,7 @@
 
 .searchForm .tags {
   text-align: left;
-  padding: 20px 0 0;
+  padding: 15px 0 0;
   width: 100%;
 }
 
