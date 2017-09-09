@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  searchForm, searchString, searchInputs, searchCategory, resultListContainer, resultList, resultItem, loading, pagination,
-  page as pageClass, active as activeClass, tags as tagsClass, resultItemBody, resultItemName
+  container, searchForm, searchString, searchInputs, searchCategory,
+  resultListContainer, resultList, resultItem, loading, pagination,
+  page as pageClass, active as activeClass, tags as tagsClass,
+  resultItemBody, resultItemName
 } from './styles.css'
 import { inactive } from '../../styles.css'
 import { getOrganizations, getTags, getCategories } from '../../api'
@@ -131,7 +133,7 @@ class Home extends Component {
     const activeCategory = hasCategories ? categories.find(({active}) => active) : { id: 0 }
     const selectedCategory = activeCategory ? activeCategory.id : 0
     return (
-      <div className='container'>
+      <div className={container}>
         <div className={searchForm}>
           <div className={searchInputs}>
             <input className={searchString} type='text' placeholder="Czego szukasz?" onChange={this.onChange.bind(this)}/>

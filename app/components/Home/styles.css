@@ -1,3 +1,15 @@
+.resultListContainer,
+.tags,
+.pagination,gigi
+.searchInputs {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.pagination {
+  max-width: 1000px;
+}
+
 .searchForm {
   padding: 20px;
   background: #EEEEEE;
@@ -101,7 +113,7 @@
 
 .tags {
   text-align: right;
-  width: 20%;
+  width: 30%;
 }
 
 .searchForm .tags {
@@ -134,7 +146,7 @@
 }
 
 .resultItemName {
-  width: 80%;
+  width: 70%;
 }
 
 .resultItemBody {
@@ -142,10 +154,6 @@
   flex-direction: row;
 }
 
-@media (max-width: 1550px) {
-  .tags { width: 30%; }
-  .resultItemName { width: 70% }
-}
 
 @media (max-width: 1000px) {
   .resultItemBody {
