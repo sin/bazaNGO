@@ -5,11 +5,12 @@ const headers = {
 
 const getAttrs = (obj) => Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&')
 
-const getOrganizations = (search, page, tags) => {
+const getOrganizations = (search, page, tags, categories) => {
   let attrs = getAttrs({
     search: search ? search : '',
     page: page ? page : 1,
-    tags__name__in: tags.filter(({active}) => active).map(({slug}) => slug).join(',')
+    tags__name__in: tags.filter(({active}) => active).map(({slug}) => slug).join(','),
+    categories__name__in: categories.filter(({active}) => active).map(({name}) => name).join(',')
   })
   return fetch(`${BASE}organization/?${attrs}`, { method: 'GET', ...headers }).then(
     (response) => response.json()
@@ -28,8 +29,15 @@ const getTags = () => {
   )
 }
 
+const getCategories = () => {
+  return fetch(`${BASE}category/`, { method: 'GET', ...headers }).then(
+    (response) => response.json()
+  )
+}
+
 export {
   getOrganizations,
   getOrganization,
-  getTags
+  getTags,
+  getCategories
 }

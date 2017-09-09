@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  searchForm, searchString, resultListContainer, resultList, resultItem, loading, pagination,
+  searchForm, searchString, searchInputs, searchCategory, resultListContainer, resultList, resultItem, loading, pagination,
   page as pageClass, active as activeClass, tags as tagsClass, resultItemBody, resultItemName
 } from './styles.css'
-import { getOrganizations, getTags } from '../../api'
+import { getOrganizations, getTags, getCategories } from '../../api'
 
 class Home extends Component {
   constructor() {
@@ -15,6 +15,7 @@ class Home extends Component {
 
   componentWillMount() {
     this.getTags()
+    this.getCategories()
     this.update()
   }
 
@@ -43,17 +44,27 @@ class Home extends Component {
     this.setState({ page }, () => this.update())
   }
 
-
   onChange() {
     this.setState({ page: 1}, () => this.update())
   }
 
   onTagClick(id) {
     let tags = this.state.tags.map((tag) => {
-      tag = tag.id === id ? {...tag, active: !tag.active } : tag
-      return tag
+      return tag.id === id ? {...tag, active: !tag.active } : tag
     })
     this.setState({ tags, page: 1 }, () => this.update())
+  }
+
+  onCategoryChange() {
+    const value = document.querySelector(`.${searchCategory} option:checked`).value
+    const categories = this.state.categories.map((category) => ({...category, active: category.id === +value}))
+    this.setState({ categories, page: 1 }, () => this.update())
+  }
+
+  getCategories() {
+    window.categories
+      ? this.setState({categories: window.categories})
+      : getCategories().then((categories) => this.setState({categories}))
   }
 
   getTags() {
@@ -68,10 +79,12 @@ class Home extends Component {
       const search = searchInput ? searchInput.value : window.searchQuery
       const page = this.state.page || (window.page || 1)
       const tags = this.state.tags || (window.tags || [])
+      const categories = this.state.categories || (window.categories || [])
       window.searchQuery = search
       window.page = page
       window.tags = tags
-      getOrganizations(search, page, tags).then(({results, count}) => {
+      window.categories = categories
+      getOrganizations(search, page, tags, categories).then(({results, count}) => {
         window.scrollTo(0, 0)
         this.setState({
           results,
@@ -88,7 +101,7 @@ class Home extends Component {
     : (<li className={loading}>Brak wyników...</li>)
   }
 
-  pagination(pages, page) {
+  renderPagination(pages, page) {
     return (
       Array.from({length: pages}).map((e, index) =>
         (
@@ -104,14 +117,33 @@ class Home extends Component {
     )
   }
 
+  renderCategories(categories) {
+    const options = categories.map(({id, name, active}) =>
+      (<option key={id} value={id}>{name}</option>))
+    return [(<option key={0} value=''>Wszystkie kategorie</option>), ...options]
+  }
+
   render () {
     const state = this.state || {}
-    const { results, pages, page, tags } = state
-
+    const { results, pages, page, tags, categories } = state
+    const hasCategories = categories && categories.length > 0
+    const activeCategory = hasCategories ? categories.find(({active}) => active) : { id: 0 }
+    const selectedCategory = activeCategory ? activeCategory.id : 0
     return (
       <div className='container'>
         <div className={searchForm}>
-          <input className={searchString} type='text' placeholder="Czego szukasz?" onChange={this.onChange.bind(this)}/>
+          <div className={searchInputs}>
+            <input className={searchString} type='text' placeholder="Czego szukasz?" onChange={this.onChange.bind(this)}/>
+            <div className={searchCategory}>
+              <select
+                name="select"
+                onChange={this.onCategoryChange.bind(this)}
+                defaultValue={selectedCategory}
+              >
+                { hasCategories ? this.renderCategories(categories) : <option>Wszystkie kategorie</option>}
+              </select>
+            </div>
+          </div>
           <div className={tagsClass}>
             {tags && tags.length > 0 ? tags.map(({id, name, slug, active}) =>
               (
@@ -128,7 +160,7 @@ class Home extends Component {
           </ul>
         </div>
         <div className={pagination}>
-          {pages && pages > 2 ? this.pagination(pages, page) : ''}
+          {pages && pages > 2 ? this.renderPagination(pages, page) : ''}
         </div>
       </div>
     )

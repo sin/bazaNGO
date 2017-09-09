@@ -4,13 +4,37 @@
   border-bottom: 1px solid #DDDDDD;
 }
 
+.searchInputs {
+  display: flex;
+  flex-direction: row;
+}
+
 .searchString {
   font-family: 'Raleway', sans-serif;
   font-size: 22px;
-  width: 100%;
+  width: 70%;
   height: 45px;
   padding: 0 10px;
-  outline: none
+  outline: none;
+}
+
+.searchCategory {
+  margin-left: 5px;
+  width: 30%;
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+}
+
+.searchCategory select {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  outline: none;
+  font-size: 22px;
+  font-family: 'Raleway', sans-serif;
+  color: #888;
 }
 
 .resultListContainer {
