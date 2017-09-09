@@ -5,9 +5,10 @@ const headers = {
 
 const getAttrs = (obj) => Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&')
 
-const getOrganizations = (search) => {
+const getOrganizations = (search, page) => {
   let attrs = getAttrs({
-    search: search ? search : ''
+    search: search ? search : '',
+    page: page ? page : 1
   })
   return fetch(`${BASE}organization/?${attrs}`, { method: 'GET', ...headers }).then(
     (response) => response.json()
