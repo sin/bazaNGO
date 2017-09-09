@@ -1,4 +1,4 @@
-const BASE = 'http://155.158.2.79:8080/api/'
+const BASE = 'https://cors-anywhere.herokuapp.com/http://155.158.2.79:8080/api/'
 const headers = {
   mode: 'cors'
 }
