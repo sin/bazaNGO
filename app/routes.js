@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import { Switch, Route } from 'react-router-dom'
 
-import { Home, Main, Organization } from './components'
+import { Home, Main, Organization, Upload } from './components'
 
 const createRoutes = (store, history) => (
   <Provider store={store}>
@@ -11,6 +11,7 @@ const createRoutes = (store, history) => (
       <Main>
         <Switch>
           <Route path='/organization/:id' component={Organization} />
+          <Route path='/upload' component={Upload} />
           <Route path='/' component={Home} />
         </Switch>
       </Main>

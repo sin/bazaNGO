@@ -1,0 +1,124 @@
+.container {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  margin: 20px 0 40px;
+}
+
+.steps {
+
+}
+
+.step {
+  font-size: 26px;
+  margin: 32px 0;
+}
+
+.step p {
+  font-size: 16px;
+}
+
+.step button {
+  display: block;
+  vertical-align: middle;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  height: 120px;
+  width: 450px;
+  margin: 25px auto;
+  background : #BA68C8;
+  color: #ffffff;
+  border: 0;
+  font-size: 28px;
+  outline: none;
+  padding: 10px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.step button:hover {
+  background: #AB47BC;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.question {
+  margin: 40px 0 20px;
+  text-align: center;
+  color: #616161;
+  font-size: 26px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 980px;
+}
+
+.choice {
+  margin: 20px;
+  width: 300px;
+  height: 300px;
+}
+
+.choiceLink {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  height: 300px;
+  width: 300px;
+  background : #BA68C8;
+  color: #ffffff;
+  border: 0;
+  font-size: 28px;
+  outline: none;
+  padding: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.choiceLink:hover {
+  background: #AB47BC;
+}
+
+.choiceLink span {
+  display: block;
+  font-size: 18px;
+}
+
+@media (max-width: 980px) {
+  .choices {
+    flex-direction: column;
+    width: 440px;
+  }
+
+  .choice {
+    height: 150px;
+    width: 400px;
+  }
+
+  .choiceLink {
+    height: 150px;
+    width: 400px;
+  }
+}
