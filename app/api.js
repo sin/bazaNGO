@@ -1,39 +1,41 @@
-const BASE = ' https://bazango.herokuapp.com/api/'
-const headers = {
-  mode: 'cors'
+import queryString from 'query-string'
+
+const BASE_URL = ' https://bazango.herokuapp.com/api/'
+
+const config = {
+  mode: 'cors',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
 }
 
-const getAttrs = (obj) => Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&')
+const isActive = ({active}) => active
+
+const tagsString = tags =>
+  tags.filter(isActive).map(({slug}) => slug).join()
+
+const categoriesString = categories =>
+  categories.filter(isActive).map(({name}) => name).join()
+
+const get = (path) =>
+  fetch(BASE_URL + path, { method: 'GET', ...config })
+    .then(response => response.json())
 
 const getOrganizations = (search, page, tags, categories) => {
-  let attrs = getAttrs({
-    search: search ? search : '',
-    page: page ? page : 1,
-    tags__name__in: tags.filter(({active}) => active).map(({slug}) => slug).join(','),
-    categories__name__in: categories.filter(({active}) => active).map(({name}) => name).join(',')
+  let query = queryString.stringify({
+    search: search,
+    page: page,
+    'tags__name__in': tagsString(tags),
+    'categories__name__in': categoriesString(categories)
   })
-  return fetch(`${BASE}organization/?${attrs}`, { method: 'GET', ...headers }).then(
-    (response) => response.json()
-  )
+  return get('organization/?' + query)
 }
 
-const getOrganization = (id) => {
-  return fetch(`${BASE}organization/${id}/`, { method: 'GET', ...headers }).then(
-    (response) => response.json()
-  )
-}
+const getOrganization = (id) => get(`organization/${id}/`)
 
-const getTags = () => {
-  return fetch(`${BASE}tag/`, { method: 'GET', ...headers }).then(
-    (response) => response.json()
-  )
-}
+const getTags = () => get('tag/')
 
-const getCategories = () => {
-  return fetch(`${BASE}category/`, { method: 'GET', ...headers }).then(
-    (response) => response.json()
-  )
-}
+const getCategories = () => get('category/')
 
 export {
   getOrganizations,
