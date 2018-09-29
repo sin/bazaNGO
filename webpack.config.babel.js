@@ -1,6 +1,5 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import UglifyJSWebpackPlugin from 'uglifyjs-webpack-plugin'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import { DefinePlugin, HotModuleReplacementPlugin } from 'webpack'
 
@@ -24,10 +23,6 @@ const productionPluginConfig = new DefinePlugin({
   'process.env': {
     NODE_ENV: JSON.stringify('production')
   }
-})
-
-const UglifyJSWebpackPluginConfig = new UglifyJSWebpackPlugin({
-  sourceMap: true
 })
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin(PATHS.build)
@@ -86,7 +81,7 @@ const productionConfig = {
     path: PATHS.build,
     filename: '[name].[chunkhash].js'
   },
-  plugins: [CleanWebpackPluginConfig, HtmlWebpackPluginConfig, productionPluginConfig, UglifyJSWebpackPluginConfig]
+  plugins: [CleanWebpackPluginConfig, HtmlWebpackPluginConfig, productionPluginConfig]
 }
 
 export default Object.assign({}, baseConfig,
