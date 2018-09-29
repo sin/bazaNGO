@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Pagination } from '../'
 import {
   container, searchForm, searchString, searchInputs, searchCategory,
-  resultListContainer, resultList, resultItem, loading, pagination,
-  page as pageClass, active as activeClass, tags as tagsClass,
-  resultItemBody, resultItemName
+  resultListContainer, resultList, resultItem, loading,
+  active as activeClass, tags as tagsClass, resultItemBody, resultItemName
 } from './styles.css'
 import { inactive } from '../../styles.css'
 import { getOrganizations, getTags, getCategories } from '../../api'
@@ -104,22 +104,6 @@ class Home extends Component {
     : (<li className={loading}>Brak wyników...</li>)
   }
 
-  renderPagination(pages, page) {
-    return (
-      Array.from({length: pages}).map((e, index) =>
-        (
-          <div
-            key={index + 1}
-            className={`${pageClass} ${index + 1 === page ? activeClass : ''}`}
-            onClick={this.setPage.bind(this, index + 1)}
-          >
-            {index + 1}
-          </div>
-        )
-      )
-    )
-  }
-
   renderCategories(categories) {
     const options = categories.map(({id, name, active}) =>
       (<option key={id} value={id}>{name}</option>))
@@ -162,9 +146,7 @@ class Home extends Component {
             {results && results.length > 0 ? results.map((el, key) => this.searchResult(el, key)) : this.loader()}
           </ul>
         </div>
-        <div className={pagination}>
-          {pages && pages > 2 ? this.renderPagination(pages, page) : ''}
-        </div>
+        <Pagination pages={pages} currentPage={page} onClick={this.setPage} />
       </div>
     )
   }

@@ -1,14 +1,11 @@
 .resultListContainer,
 .tags,
-.pagination,
 .searchInputs {
   margin: 0 auto;
   max-width: 1200px;
 }
 
-.pagination {
-  max-width: 1000px;
-}
+
 
 .searchForm {
   padding: 30px;
@@ -81,35 +78,7 @@
   text-align: center;
 }
 
-.pagination {
-  padding: 60px;
-  text-align: center;
-}
 
-.page {
-  margin: 5px;
-  background: #BA68C8;
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-  text-align: center;
-  color: #FFFFFF;
-  line-height: 30px;
-  cursor: pointer;
-}
-
-.page.active {
-  background: #DDDDDD;
-  color: #616161;
-}
-
-.page:hover {
-  background: #AB47BC;
-}
-
-.page.active:hover {
-  background: #DDDDDD;
-}
 
 .tags {
   text-align: right;

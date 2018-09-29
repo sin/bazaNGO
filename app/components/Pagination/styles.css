@@ -1,0 +1,34 @@
+.pagination {
+  padding: 60px;
+  margin: 0 auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.page {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+
+  margin: 5px;
+  line-height: 30px;
+
+  background: #BA68C8;
+  color: #FFFFFF;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.page:hover {
+  background: #AB47BC;
+}
+
+.page.active {
+  background: #DDDDDD;
+  color: #616161;
+}
+
+.page.active:hover {
+  background: #DDDDDD;
+}
