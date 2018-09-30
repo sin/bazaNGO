@@ -1,6 +1,6 @@
 import queryString from 'query-string'
 
-const BASE_URL = ' https://bazango.herokuapp.com/api/'
+const BASE_URL = 'https://bazango.herokuapp.com/api/'
 
 const config = {
   mode: 'cors',
