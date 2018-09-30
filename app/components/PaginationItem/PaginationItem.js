@@ -18,7 +18,7 @@ const PaginationItem = ({page, active, onClick}) => {
 
 PaginationItem.propTypes = {
   page: PropTypes.number.isRequired,
-  active: PropTypes.number.isRequired,
+  active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired
 }
 

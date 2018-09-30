@@ -99,7 +99,7 @@ class Home extends Component {
   }
 
   render () {
-    const { results, pages, page, tags, categories } = this.state
+    const { isLoading, results, pages, page, tags, categories } = this.state
 
     return (
       <div className={container}>
@@ -109,7 +109,7 @@ class Home extends Component {
             {results && results.length > 0 ? results.map((el, key) => this.renderSearchResult(el, key)) : this.loader()}
           </ul>
         </div>
-        <Pagination pages={pages} currentPage={page} onClick={this.onPageChange} />
+        {isLoading ? null : <Pagination pages={pages} currentPage={page} onClick={this.onPageChange} />}
       </div>
     )
   }
