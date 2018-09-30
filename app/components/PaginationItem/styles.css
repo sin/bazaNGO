@@ -1,0 +1,26 @@
+.paginationItem {
+  height: 30px;
+  width: 30px;
+
+  margin: 5px;
+  line-height: 30px;
+
+  background: #BA68C8;
+  color: #FFFFFF;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.paginationItem:hover {
+  background: #AB47BC;
+}
+
+.active {
+  background: #DDDDDD;
+  color: #616161;
+}
+
+.active:hover {
+  background: #CCCCCC;
+}
