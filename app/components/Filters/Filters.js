@@ -2,7 +2,7 @@ import React, { Component, createContext } from 'react'
 import propTypes from 'prop-types'
 import debounce from 'lodash/debounce'
 
-import { Categories, Tags } from '../'
+import { Search, Categories, Tags } from '../'
 import { getCategories, getTags } from '../../api'
 import styles from './styles.css'
 
@@ -84,9 +84,7 @@ class Filters extends Component {
       <Filters.Context.Consumer>
         {
           ({search, onSearchChange}) =>
-            <input
-              type='text'
-              className={styles.search}
+            <Search
               placeholder={placeholder}
               onChange={onSearchChange}
               value={search}

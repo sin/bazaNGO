@@ -6,7 +6,6 @@ import noop from 'lodash/noop'
 import styles from './styles.css'
 
 const Tag = ({name, active = false, onClick}) => {
-
   const classes = classNames(
     styles.tag,
     active ? styles.active : '',

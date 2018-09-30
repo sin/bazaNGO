@@ -10,10 +10,6 @@
   outline: none;
 }
 
-.search {
-  composes: formElements;
-}
-
 .loading {
   padding: 0;
   text-align: center;
