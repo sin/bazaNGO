@@ -1,8 +1,8 @@
 import React, { Component, createContext } from 'react'
 import propTypes from 'prop-types'
 import debounce from 'lodash/debounce'
-import noop from 'lodash/noop'
 
+import { Tags } from '../'
 import { getTags, getCategories } from '../../api'
 import styles from './styles.css'
 
@@ -14,11 +14,6 @@ const Loading = ({text}) =>
 const Category = ({id = '', name}) =>
   <option value={id}>{name}</option>
 
-const Tag = ({name, active, onClick = noop}) =>
-  <span onClick={onClick} className={`${styles.tag} ${active ? styles.active : ''}`}>
-    {name}
-  </span>
-
 Loading.propTypes = {
   text: propTypes.string.isRequired
 }
@@ -26,12 +21,6 @@ Loading.propTypes = {
 Category.propTypes = {
   id: propTypes.number,
   name: propTypes.string.isRequired
-}
-
-Tag.propTypes = {
-  name: propTypes.string.isRequired,
-  active: propTypes.bool,
-  onClick: propTypes.func
 }
 
 class Filters extends Component {
@@ -141,24 +130,7 @@ class Filters extends Component {
   }
 
   static Tags() {
-    return (
-      <div className={styles.tags}>
-        <Filters.Context.Consumer>
-          {
-            ({tags, activeTags, onTagClick}) =>
-              tags.map(({id, name, active}) =>
-                <Tag
-                  key={id}
-                  id={id}
-                  name={name}
-                  active={activeTags.includes(id)}
-                  onClick={() => onTagClick(id)}
-                />
-              )
-          }
-        </Filters.Context.Consumer>
-      </div>
-    )
+    return <Filters.Context.Consumer>{Tags}</Filters.Context.Consumer>
   }
 
   render() {
