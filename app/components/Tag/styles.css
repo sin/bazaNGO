@@ -14,12 +14,20 @@
   content: '\00a0\00a0';
 }
 
-.tag:hover,
-.active {
-  background: #AAAAAA;
-  color: #FFFFFF;
+.small {
+  font-size: 12px;
+}
+
+.big {
+  font-size: 21px;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.clickable:hover,
+.active {
+  background: #AAAAAA;
+  color: #FFFFFF;
 }

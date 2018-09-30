@@ -1,13 +1,19 @@
 import React from 'react'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import noop from 'lodash/noop'
-
 import styles from './styles.css'
 
-const Tag = ({name, active = false, onClick}) => {
+const sizes = {
+  normal: '',
+  big: styles.big,
+  small: styles.small
+}
+
+const Tag = ({name, size = 'normal', active = false, onClick}) => {
   const classes = classNames(
     styles.tag,
+    sizes[size],
     active ? styles.active : '',
     onClick ? styles.clickable : ''
   )
@@ -20,9 +26,10 @@ const Tag = ({name, active = false, onClick}) => {
 }
 
 Tag.propTypes = {
-  name: propTypes.string.isRequired,
-  active: propTypes.bool,
-  onClick: propTypes.func
+  name: PropTypes.string.isRequired,
+  size: PropTypes.string,
+  active: PropTypes.bool,
+  onClick: PropTypes.func
 }
 
 export default Tag

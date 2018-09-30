@@ -1,16 +1,19 @@
 .paginationItem {
   display: inline-block;
-
   height: 30px;
-  width: 30px;
+  min-width: 32px;
 
   margin: 5px;
-  line-height: 30px;
+  padding: 0 5px;
+  line-height: 32px;
 
   background: #BA68C8;
   color: #FFFFFF;
 
+  font-family: sans-serif;
+  font-weight: 300;
   text-align: center;
+
   cursor: pointer;
 }
 

@@ -1,24 +1,17 @@
 import React, { Component, createContext } from 'react'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
 
-import { Search, Categories, Tags } from '../'
+import { Search, Categories, Tags, Message } from '../'
 import { getCategories, getTags } from '../../api'
 import styles from './styles.css'
 
 const SEARCH_DELAY = 250
 
-const Loading = ({text}) =>
-  <p className={styles.loading}>{text}</p>
-
-Loading.propTypes = {
-  text: propTypes.string.isRequired
-}
-
 class Filters extends Component {
   static propTypes = {
-    onChange: propTypes.func.isRequired,
-    children: propTypes.node.isRequired
+    onChange: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired
   }
 
   constructor() {
@@ -106,7 +99,7 @@ class Filters extends Component {
     const { isLoading } = this.state
     return (
       <Filters.Context.Provider value={this.state}>
-        {isLoading ? <Loading text='Ładowanie…' /> : this.props.children}
+        { isLoading ? <Message text='Ładowanie…' /> : this.props.children }
       </Filters.Context.Provider>
     )
   }
