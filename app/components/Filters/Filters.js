@@ -2,8 +2,8 @@ import React, { Component, createContext } from 'react'
 import propTypes from 'prop-types'
 import debounce from 'lodash/debounce'
 
-import { Tags } from '../'
-import { getTags, getCategories } from '../../api'
+import { Categories, Tags } from '../'
+import { getCategories, getTags } from '../../api'
 import styles from './styles.css'
 
 const SEARCH_DELAY = 250
@@ -11,16 +11,8 @@ const SEARCH_DELAY = 250
 const Loading = ({text}) =>
   <p className={styles.loading}>{text}</p>
 
-const Category = ({id = '', name}) =>
-  <option value={id}>{name}</option>
-
 Loading.propTypes = {
   text: propTypes.string.isRequired
-}
-
-Category.propTypes = {
-  id: propTypes.number,
-  name: propTypes.string.isRequired
 }
 
 class Filters extends Component {
@@ -105,28 +97,7 @@ class Filters extends Component {
   }
 
   static Categories() {
-    return (
-      <div className={styles.categories}>
-        <Filters.Context.Consumer>
-          {
-            ({categories, category, onCategoryChange}) =>
-              <select
-                name='select'
-                className={styles.categoriesSelect}
-                onChange={onCategoryChange}
-                value={category}
-              >
-                {[
-                  <Category key={''} name='Wszystkie kategorie' />,
-                  ...categories.map(({id, name}) =>
-                    <Category key={id} id={id} name={name} />
-                  )
-                ]}
-              </select>
-          }
-        </Filters.Context.Consumer>
-      </div>
-    )
+    return <Filters.Context.Consumer>{Categories}</Filters.Context.Consumer>
   }
 
   static Tags() {

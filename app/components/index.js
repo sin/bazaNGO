@@ -1,3 +1,5 @@
+export Categories from './Categories/Categories'
+export Category from './Category/Category'
 export Edit from './Edit/Edit'
 export Filters from './Filters/Filters'
 export Home from './Home/Home'

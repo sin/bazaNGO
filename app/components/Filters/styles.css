@@ -14,22 +14,6 @@
   composes: formElements;
 }
 
-.categories {
-  height: 45px;
-  background: #FFFFFF;
-  border: 1px solid #DDDDDD;
-}
-
-.categoriesSelect {
-  composes: formElements;
-
-  border: 0;
-  border-radius: 0;
-
-  background: transparent;
-  color: #888;
-}
-
 .loading {
   padding: 0;
   text-align: center;
