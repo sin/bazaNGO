@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { Pagination, Filters, OrganizationsItem, Message } from '../'
 import { getOrganizations } from '../../api'
-
 import styles from './styles.css'
 
 class Organizations extends Component {
@@ -33,7 +30,7 @@ class Organizations extends Component {
   }
 
   fetchData() {
-    this.setState({ isLoading: true}, () => {
+    this.setState({ isLoading: true }, () => {
       const { page, filters } = this.state
       getOrganizations(page, filters).then(this.onFetchData)
     })
@@ -52,7 +49,7 @@ class Organizations extends Component {
     window.scrollTo(0, 0)
   }
 
-  render () {
+  render() {
     const { isLoading, results, pages, page } = this.state
 
     return (
@@ -77,12 +74,12 @@ class Organizations extends Component {
             isLoading
               ? <Message text={'Ładowanie…'} alt={true} />
               : <ul className={styles.resultsList}>
-                  {
-                    results && results.length > 0
-                      ? results.map(value => <OrganizationsItem key={value.id} value={value} />)
-                      : <Message text={'Nic nie znaleziono… 😞'} alt={true} />
-                  }
-                </ul>
+                {
+                  (results && results.length > 0)
+                    ? results.map(value => <OrganizationsItem key={value.id} value={value} />)
+                    : <Message text={'Nic nie znaleziono… 😞'} alt={true} />
+                }
+              </ul>
           }
         </div>
         {isLoading ? null : <Pagination pages={pages} currentPage={page} onClick={this.onPageChange} />}

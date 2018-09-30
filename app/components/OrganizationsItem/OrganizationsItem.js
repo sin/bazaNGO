@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom'
 import { Badge, Tag } from '../'
 import styles from './styles.css'
 
-const OrganizationsItem = ({ value: {id, name, tags, is_active: active}}) =>
+const OrganizationsItem = ({value: {id, name, tags, is_active: active}}) =>
   <li className={styles.container}>
     <Link to={`/organization/${id}`} className={styles.link}>
       <div className={styles.layout}>
         <div className={styles.name}>
           {name}
           {
-            active ? null :
-              <Badge text={'Nieaktywna'} variant={'warning'} size={'small'} />
+            active
+              ? null
+              : <Badge text={'Nieaktywna'} variant={'warning'} size={'small'} />
           }
         </div>
         <div className={styles.tags}>

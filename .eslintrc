@@ -21,6 +21,11 @@
     "react",
     "promise"
   ],
+  "settings": {
+    "react": {
+      "version": "16.5"
+    }
+  },
   "rules": {
     "no-console": [2, {"allow": ["warn", "error"]}],
     "indent": [2, 2],

@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { banner } from './styles.css'
 import { Organization } from '../'
 
-class Saved extends Component {
-  constructor() {
-    super()
-  }
+const Saved = ({match}) =>
+  <div>
+    <div className={banner}>
+      <i className="fa fa-check-circle" aria-hidden="true" />
+      {' Zapisano! Zmiany pojawią się po zaakceptowaniu przez administratora!'}
+    </div>
+    <Organization match={match} disableEdit={true} />
+  </div>
 
-  render () {
-    return (
-      <div>
-        <div className={banner}><i className="fa fa-check-circle" aria-hidden="true"/> Zapisano! Zmiany pojawią się po zaakceptowaniu przez administratora!</div>
-        <Organization match={this.props.match} disableEdit={true} />
-      </div>
-    )
-  }
+Saved.propTypes = {
+  match: PropTypes.object
 }
 
 export default Saved

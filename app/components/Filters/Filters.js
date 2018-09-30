@@ -4,7 +4,6 @@ import debounce from 'lodash/debounce'
 
 import { Search, Categories, Tags, Message } from '../'
 import { getCategories, getTags } from '../../api'
-import styles from './styles.css'
 
 const SEARCH_DELAY = 250
 
