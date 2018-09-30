@@ -5,17 +5,34 @@ import noop from 'lodash/noop'
 import styles from './styles.css'
 
 const sizes = {
-  normal: '',
+  default: '',
   big: styles.big,
   small: styles.small
 }
 
-const Tag = ({name, size = 'normal', active = false, onClick}) => {
+const variants = {
+  default: '',
+  warning: styles.warning,
+  success: styles.success
+}
+
+const Tag = (props) => {
+  const {
+    name,
+    size = 'default',
+    variant = 'default',
+    active = false,
+    className = '',
+    onClick
+  } = props
+
   const classes = classNames(
     styles.tag,
-    sizes[size],
+    sizes[size] || '',
+    variants[variant] || '',
     active ? styles.active : '',
-    onClick ? styles.clickable : ''
+    onClick ? styles.clickable : '',
+    className
   )
 
   return (
@@ -28,7 +45,9 @@ const Tag = ({name, size = 'normal', active = false, onClick}) => {
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.string,
+  variant: PropTypes.string,
   active: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func
 }
 

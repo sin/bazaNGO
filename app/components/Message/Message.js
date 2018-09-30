@@ -24,11 +24,3 @@ Message.propTypes = {
 }
 
 export default Message
-
-/*
-loader() {
-  return this.state && this.state.isLoading
-  ? (<li className={styles.loading}>Ładowanie wyników...</li>)
-  : (<li className={styles.loading}>Brak wyników...</li>)
-}
-*/

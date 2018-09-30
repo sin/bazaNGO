@@ -22,6 +22,16 @@
   font-size: 21px;
 }
 
+.success {
+  background-color: #2E7D32;
+  color: #FFFFFF;
+}
+
+.warning {
+  background-color: #B71C1C;
+  color: #FFFFFF;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -30,4 +40,14 @@
 .active {
   background: #AAAAAA;
   color: #FFFFFF;
+}
+
+.success.clickable:hover,
+.success.active {
+  background: #276B2B;
+}
+
+.warning.clickable:hover,
+.warning.active {
+  background: #9A1515;
 }

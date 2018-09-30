@@ -1,3 +1,4 @@
+export Badge from './Badge/Badge'
 export Categories from './Categories/Categories'
 export Category from './Category/Category'
 export Edit from './Edit/Edit'

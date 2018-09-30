@@ -9,7 +9,6 @@ const Tags = ({tags, activeTags, onTagClick}) =>
       tags.map(({id, name, active}) =>
         <Tag
           key={id}
-          id={id}
           name={name}
           active={activeTags.includes(id)}
           onClick={() => onTagClick(id)}

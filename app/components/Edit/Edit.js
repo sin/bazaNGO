@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { container, saveLink, input as inputClass, purpose as purposeClass, loading, fourofour, contact } from './styles.css'
-import { orgTags } from '../Home/styles.css'
+import { tags } from '../Organizations/styles.css'
 import { getOrganization } from '../../api'
 import { inactiveHeader } from '../../styles.css'
 

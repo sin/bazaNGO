@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { container, editLink, name as nameClass, loading, fourofour, contact, positions, adminName, adminPosition } from './styles.css'
-import { orgTags } from '../Home/styles.css'
+import { orgTags } from '../Organizations/styles.css'
 import { getOrganization } from '../../api'
 import { inactiveHeader } from '../../styles.css'
 
