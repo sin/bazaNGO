@@ -1,4 +1,5 @@
 export Home from './Home/Home'
+export Filters from './Filters/Filters'
 export Main from './Main/Main'
 export Organization from './Organization/Organization'
 export Pagination from './Pagination/Pagination'

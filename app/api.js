@@ -9,24 +9,16 @@ const config = {
   }
 }
 
-const isActive = ({active}) => active
-
-const tagsString = tags =>
-  tags.filter(isActive).map(({slug}) => slug).join()
-
-const categoriesString = categories =>
-  categories.filter(isActive).map(({name}) => name).join()
-
 const get = (path) =>
   fetch(BASE_URL + path, { method: 'GET', ...config })
     .then(response => response.json())
 
-const getOrganizations = (search, page, tags, categories) => {
+const getOrganizations = (page, {category, activeTags, search}) => {
   let query = queryString.stringify({
-    search: search,
-    page: page,
-    'tags__name__in': tagsString(tags),
-    'categories__name__in': categoriesString(categories)
+    search,
+    page,
+    'tags__name__in': activeTags.join(','),
+    'categories__name__in': category
   })
   return get('organization/?' + query)
 }

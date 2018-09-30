@@ -29,10 +29,10 @@
     "quotes": [2, "single"],
     "semi": [2, "never"],
     "no-extra-semi": 2,
+    "space-before-function-paren": ["error", "never"],
     "react/jsx-no-literals": 2,
     "promise/always-return": 2,
     "promise/no-return-wrap": 2,
-    "promise/param-names": 2,
-    "promise/catch-or-return": 2
+    "promise/param-names": 2
   }
 }
