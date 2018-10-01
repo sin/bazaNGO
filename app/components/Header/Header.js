@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { DEFAULT_HEADER_TEXT } from '../../constants'
 import styles from './styles.css'
-
-const DEFAULT_HEADER_TEXT = 'Baza Organizacji Pozarządowych COP'
 
 const Header = ({text = DEFAULT_HEADER_TEXT}) =>
   <div className={styles.header}>

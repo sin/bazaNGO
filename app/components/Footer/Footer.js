@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
-
-const GITHUB_URL = 'https://github.com/sin/bazaNGO'
+import { GITHUB_URL } from '../../constants'
 
 const Footer = () =>
   <div className={styles.footer}>
