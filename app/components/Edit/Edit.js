@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import styles from './styles.css'
 import { getOrganization } from '../../api'
+import styles from './styles.css'
 
 class Edit extends Component {
   static propTypes = {

@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { PaginationItem } from '../'
+import { range } from '../../helpers'
 import styles from './styles.css'
-
-const range = range => Array.from({length: range}, (_, index) => index + 1)
 
 const Pagination = ({pages, currentPage, onClick}) =>
   <div className={styles.pagination}>

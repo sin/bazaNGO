@@ -1,4 +1,5 @@
 import queryString from 'query-string'
+import { transformOrganization } from './transforms'
 
 const BASE_URL = 'https://bazango.herokuapp.com/api/'
 
@@ -23,7 +24,8 @@ const getOrganizations = (page, {category, activeTags, search}) => {
   return get('organization/?' + query)
 }
 
-const getOrganization = (id) => get(`organization/${id}/`)
+const getOrganization = (id) =>
+  get(`organization/${id}/`).then(transformOrganization)
 
 const getTags = () => get('tag/')
 

@@ -13,10 +13,10 @@ const transformOrganization = data => ({
   purpose: data.profile.purpose || normalizeText(data.purpose),
   active: Boolean(data.is_active),
   info: {
-    nip: Number(data.nip) || null,
-    krs: Number(data.krs) || null,
+    nip: data.nip && data.nip !== '0' ? data.nip : null,
+    krs: data.krs || null,
     active: Boolean(data.is_active),
-    registered: data.register_at,
+    registered: data.register_at
   },
   address: {
     country: data.country,

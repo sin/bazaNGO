@@ -16,16 +16,14 @@ const variants = {
   success: styles.success
 }
 
-const Tag = (props) => {
-  const {
-    name,
-    size = 'default',
-    variant = 'default',
-    active = false,
-    className = '',
-    onClick
-  } = props
-
+const Tag = ({
+  name,
+  size = 'default',
+  variant = 'default',
+  active = false,
+  className = '',
+  onClick
+}) => {
   const classes = classNames(
     styles.tag,
     sizes[size] || '',
