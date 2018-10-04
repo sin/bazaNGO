@@ -1,103 +1,90 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { getOrganization } from '../../api'
+import { getOrganization, postProposal } from '../../api'
 import styles from './styles.css'
+
+const TextInput = (props) => <input type='text' className={styles.input} {...props} />
 
 class Edit extends Component {
   static propTypes = {
-    match: PropTypes.object
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
+
+  constructor() {
+    super()
+
+    this.state = {
+      isLoading: true,
+      organization: {}
+    }
+
+    this.fetchData = this.fetchData.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleNameChange = this.handleChange.bind(this, null, 'name')
+    this.handlePurposeChange = this.handleChange.bind(this, null, 'purpose')
+    this.handleEmailChange = this.handleChange.bind(this, 'contact', 'email')
+    this.handlePhoneChange = this.handleChange.bind(this, 'contact', 'phone')
+    this.handleWebsiteChange = this.handleChange.bind(this, 'contact', 'website')
+    this.handleFacebookChange = this.handleChange.bind(this, 'contact', 'facebook')
   }
 
   componentDidMount() {
-    this.update()
+    this.fetchData()
   }
 
-  searchResult({name}, key) {
-    return (<li key={key} className={styles.resultItem}>{name}</li>)
-  }
-
-  update() {
+  fetchData() {
     const id = this.props.match.params.id
-    this.setState({ isLoading: true })
-    getOrganization(id).then((organization) => {
-      return this.setState({
-        organization,
-        isLoading: false
+
+    this.setState({ isLoading: true }, () => {
+      getOrganization(id).then((organization) => {
+        return this.setState({
+          organization,
+          isLoading: false
+        })
       })
     })
   }
 
-  updateName() {
-    const value = document.querySelector('.nameField').value
-    const profile = {...this.state.organization.profile, name: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
+  handleChange(group, field, event) {
+    const { organization } = this.state
+    const { value } = event.target
+
+    const newOrganization = group
+      ? {...organization, [group]: {...organization[group], [field]: value}}
+      : {...organization, [field]: value}
+
+    this.setState({ organization: newOrganization })
   }
 
-  updatePurpose() {
-    const value = document.querySelector('.purposeField').value
-    const profile = {...this.state.organization.profile, purpose: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
-  }
+  handleSubmit() {
+    const { history } = this.props
+    const { organization: data } = this.state
 
-  updateEmail() {
-    const value = document.querySelector('.emailField').value
-    const profile = {...this.state.organization.profile, email: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
-  }
-
-  updatePhone() {
-    const value = document.querySelector('.phoneField').value
-    const profile = {...this.state.organization.profile, phone_number: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
-  }
-
-  updateWww() {
-    const value = document.querySelector('.wwwField').value
-    const profile = {...this.state.organization.profile, www: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
-  }
-
-  updateFacebook() {
-    const value = document.querySelector('.facebookField').value
-    const profile = {...this.state.organization.profile, facebook: value}
-    const organization = {...this.state.organization, profile}
-    this.setState({organization})
-  }
-
-  loader() {
-    return (
-      this.state && this.state.isLoading
-        ? <div className={styles.loading}>{'Ładowanie...'}</div>
-        : <div className={styles.fourofour}>{'404'}</div>
-    )
+    postProposal(data)
+      .then(() => history.push(`/organization/${data.id}`))
+      .catch(() => null) // TODO
   }
 
   render() {
-    const organization = (this.state && this.state.organization) || { empty: true }
-    let { id, name, purpose, profile, empty, detail } = organization
-    profile = profile || {}
+    const { isLoading, organization } = this.state
+    const { name, purpose, contact } = organization
+
     return (
-      <div className={styles.container}>
-        {
-          (!empty && !detail) ? (
-            <div>
-              <input className={`${styles.inputClass} nameField`} value={(profile && profile.name) || name} onChange={this.updateName.bind(this)}/>
-              <textarea className={`${styles.purposeClass} purposeField`} defaultValue={purpose && purpose.split('. ').map((sentence) => sentence[0].toUpperCase() + sentence.substr(1).toLowerCase()).join('. ')} onChange={this.updatePurpose.bind(this)}/>
-              <input placeholder='Email' className={`${styles.inputClass} emailField`} value={profile && profile.email} onChange={this.updateEmail.bind(this)}/>
-              <input placeholder='Telefon' className={`${styles.inputClass} phoneField`} value={profile && profile.phone_number} onChange={this.updatePhone.bind(this)}/>
-              <input placeholder='Strona internetowa' className={`${styles.inputClass} wwwField`} value={profile && profile.www} onChange={this.updateWww.bind(this)}/>
-              <input placeholder='Facebook' className={`${styles.inputClass} facebookField`} value={profile && profile.facebook} onChange={this.updateFacebook.bind(this)}/>
-              <Link className={styles.saveLink} to={`/organization/${id}/saved/`}>{'Zapisz'}</Link>
-            </div>
-          ) : (<span>{this.loader()}</span>)
-        }
-      </div>
+      isLoading
+        ? null
+        : <div className={styles.container}>
+          <form onSubmit={this.handleSubmit}>
+            <TextInput placeholder={'Nazwa organizacji'} value={name} onChange={this.handleNameChange} />
+            <textarea placeholder={'Cele organizacji'} value={purpose} onChange={this.handlePurposeChange} className={styles.purpose} />
+            <TextInput placeholder={'Email'} value={contact.email} onChange={this.handleEmailChange} />
+            <TextInput placeholder={'Telefon'} value={contact.phone} onChange={this.handlePhoneChange} />
+            <TextInput placeholder={'Strona internetowa'} value={contact.website} onChange={this.handleWebsiteChange} />
+            <TextInput placeholder={'Facebook'} value={contact.facebook} onChange={this.handleFacebookChange} />
+            <input type='submit' value='Wyślij' className={styles.submit} />
+          </form>
+        </div>
     )
   }
 }

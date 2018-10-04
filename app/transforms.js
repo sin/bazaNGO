@@ -41,6 +41,19 @@ const transformOrganization = data => ({
   people: data.administration.map(transformPerson)
 })
 
+const transformProposal = (data) => ({
+  organization: data.id,
+  name: data.name,
+  purpose: data.purpose,
+  email: data.contact.email,
+  phone_number: data.contact.phone,
+  www: data.contact.website,
+  facebook: data.contact.facebook,
+  longitude: null,
+  latitude: null
+})
+
 export {
-  transformOrganization
+  transformOrganization,
+  transformProposal
 }

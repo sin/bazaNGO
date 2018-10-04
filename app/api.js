@@ -1,5 +1,5 @@
 import queryString from 'query-string'
-import { transformOrganization } from './transforms'
+import { transformOrganization, transformProposal } from './transforms'
 
 const BASE_URL = 'https://bazango.herokuapp.com/api/'
 
@@ -12,6 +12,10 @@ const config = {
 
 const get = (path) =>
   fetch(BASE_URL + path, { method: 'GET', ...config })
+    .then(response => response.json())
+
+const post = (path, data) =>
+  fetch(BASE_URL + path, { method: 'POST', body: JSON.stringify(data), ...config })
     .then(response => response.json())
 
 const getOrganizations = (page, {category, activeTags, search}) => {
@@ -31,9 +35,12 @@ const getTags = () => get('tag/')
 
 const getCategories = () => get('category/')
 
+const postProposal = (data) => post('organization-proposal/', transformProposal(data))
+
 export {
   getOrganizations,
   getOrganization,
   getTags,
-  getCategories
+  getCategories,
+  postProposal
 }
